@@ -10,7 +10,7 @@ class VehiculoController extends Controller
     public function show($id): View
     {
         // NOTA: Para AUTO-REST, el endpoint es diferente, suele ser la URL base + alias de tabla + ID
-        $apiUrl = 'https://<ID-ALEATORIO>.adb.region.oraclecloudapps.com/ords/automotora/vehiculos/' . $id;
+        $apiUrl = 'https://ge3810f3f6838ef-automotoradb.adb.sa-santiago-1.oraclecloudapps.com/ords/automotora_ws/v1/vehiculos' . $id;
 
         $response = Http::get($apiUrl);
 

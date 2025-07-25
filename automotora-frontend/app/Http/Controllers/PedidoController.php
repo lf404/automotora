@@ -13,6 +13,7 @@ Route::get('/vehiculo/{vehiculo}', [VehiculoController::class, 'show'])->name('v
 
 // Muestra la página de confirmación del pedido (el "checkout")
 Route::get('/checkout/{vehiculo}', [PedidoController::class, 'checkout'])->name('checkout.show');
+    $apiUrl = "https://ge3810f3f6838ef-automotoradb.adb.sa-santiago-1.oraclecloudapps.com/ords/automotora_ws/v1/vehiculos" . $vehiculoId;
 
 // Procesa el pedido. Esta es la ruta a la que el formulario de checkout hará POST.
 Route::post('/pedido', [PedidoController::class, 'store'])->name('pedido.store');
