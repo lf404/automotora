@@ -2,24 +2,47 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\View\View;
 
 class VehiculoController extends Controller
 {
+    /**
+     * Muestra el catálogo de vehículos disponibles.
+     * ESTE ES EL MÉTODO QUE FALTABA O ESTABA MAL ESCRITO.
+     */
+    public function index(): View
+    {
+        // Construimos la URL a partir de nuestra configuración segura.
+        $apiUrl = config('ords.base_url') . '/v1/vehiculos';
+
+        $response = Http::get($apiUrl);
+        
+        $vehiculos = [];
+        // Verificamos si la respuesta fue exitosa ANTES de intentar decodificar el JSON.
+        if ($response->successful()) {
+            // La API de ORDS envuelve la lista en una clave 'items'.
+            // El '?? []' es un seguro por si 'items' no viniera en la respuesta.
+            $vehiculos = $response->json()['items'] ?? [];
+        }
+
+        // Pasamos la lista (o un array vacío si falló) a la vista.
+        return view('welcome', ['vehiculos' => $vehiculos]);
+    }
+
+    /**
+     * Muestra la página de detalle de un vehículo específico.
+     */
     public function show($id): View
     {
-        // NOTA: Para AUTO-REST, el endpoint es diferente, suele ser la URL base + alias de tabla + ID
-        $apiUrl = 'https://ge3810f3f6838ef-automotoradb.adb.sa-santiago-1.oraclecloudapps.com/ords/automotora_ws/v1/vehiculos' . $id;
+        $apiUrl = config('ords.base_url') . '/v1/vehiculos/' . $id;
 
         $response = Http::get($apiUrl);
 
-        // ¡IMPORTANTE! ORDS puede devolver un array vacío si no encuentra el ID, o un error si el ID es inválido.
-        // Haremos un manejo de errores robusto aquí.
+        // Si la respuesta no es exitosa o el cuerpo está vacío, mostramos un error 404.
         if (!$response->successful() || empty($response->json())) {
-        // Si el vehículo no se encuentra o hay un error, redirigimos al usuario al inicio.
-        // La función abort() muestra una página de error estándar.
-        abort(404, 'Vehículo no encontrado');
+            abort(404, 'Vehículo no encontrado');
         }
 
         $vehiculo = $response->json();
