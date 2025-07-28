@@ -22,13 +22,13 @@ return [
     // ya que tu 'base_url' podría ser diferente para otros módulos.
 
     // Endpoint para obtener la LISTA de vehículos
-    'vehiculos_list_endpoint'   => 'https://ge3810f3f6838ef-automotoradb.adb.sa-santiago-1.oraclecloudapps.com/ords/automotora_ws/v1/vehiculos',
+    'vehiculos_list_endpoint'   => 'https://ge3810f3f6838ef-automotoradb.adb.sa-santiago-1.oraclecloudapps.com/ords/automotora_ws/v1_public/vehiculos',
     
     // Endpoint para obtener el DETALLE de un vehículo. Dejamos la barra al final para añadir el ID.
-    'vehiculo_detail_endpoint'  => 'https://ge3810f3f6838ef-automotoradb.adb.sa-santiago-1.oraclecloudapps.com/ords/automotora_ws/v1/vehiculos/', 
+    'vehiculo_detail_endpoint'  => 'https://ge3810f3f6838ef-automotoradb.adb.sa-santiago-1.oraclecloudapps.com/ords/automotora_ws/v1_public/vehiculos/', 
     
     // Endpoint para CREAR un nuevo pedido.
-    'pedidos_create_endpoint'   => 'https://ge3810f3f6838ef-automotoradb.adb.sa-santiago-1.oraclecloudapps.com/ords/automotora_ws/v1/pedidos',
+    'pedidos_create_endpoint'   => 'https://ge3810f3f6838ef-automotoradb.adb.sa-santiago-1.oraclecloudapps.com/ords/automotora_ws/v1_private/pedidos',
 
     // Endpoint para la obtención del token OAuth2
     'oauth_token_endpoint'      => 'https://ge3810f3f6838ef-automotoradb.adb.sa-santiago-1.oraclecloudapps.com/ords/automotora_ws/oauth/token',
