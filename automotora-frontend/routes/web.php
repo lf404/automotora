@@ -1,21 +1,20 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\VehiculoController;
-use App\Http\Controllers\PedidoController; // ¡Importa el nuevo controlador!
 
-// Muestra el catálogo de todos los vehículos
-Route::get('/', [VehiculoController::class, 'index'])->name('home');
+Route::get('/', function () {
+    return view('welcome');
+});
 
-// Muestra la página de detalle de un vehículo específico
-// {vehiculo} es un parámetro de ruta. El valor se pasará al método 'show'.
-Route::get('/vehiculo/{vehiculo}', [VehiculoController::class, 'show'])->name('vehiculo.show');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-// Muestra la página de confirmación del pedido (el "checkout")
-Route::get('/checkout/{vehiculo}', [PedidoController::class, 'checkout'])->name('checkout.show');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
-// Procesa el pedido. Esta es la ruta a la que el formulario de checkout hará POST.
-Route::post('/pedido', [PedidoController::class, 'store'])->name('pedido.store');
-
-// Página de éxito después de la compra
-Route::get('/pedido/exito', [PedidoController::class, 'success'])->name('pedido.success');
+require __DIR__.'/auth.php';
