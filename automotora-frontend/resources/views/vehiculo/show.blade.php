@@ -23,7 +23,7 @@
             <img src="{{ $vehiculo['foto_url'] }}" alt="Foto de {{ $vehiculo['marca'] }} {{ $vehiculo['modelo'] }}">
         @endif
 
-        <p class="precio">Precio Final: ${{ number_format($vehiculo['precio'], 0, ',', '.') }}</p>
+        <p class="precio">Precio Final: ${{ number_format($vehiculo['precio_clp'], 0, ',', '.') }}</p>
         <p><strong>Descripción:</strong></p>
         <p>{{ $vehiculo['descripcion'] }}</p>
 

@@ -19,8 +19,7 @@
         @forelse ($vehiculos as $vehiculo)
         <div>
             <h2>{{ $vehiculo['marca'] }} {{ $vehiculo['modelo'] }} ({{ $vehiculo['ano'] }})</h2>
-            <p>Precio: ${{ number_format($vehiculo['precio'], 2) }}</p>
-            <img src="{{ $vehiculo['foto_url'] }}" alt="Foto del vehículo" width="300">
+            <p>Precio: ${{ number_format($vehiculo['precio_clp'], 0, ',', '.') }}</p>            <img src="{{ $vehiculo['foto_url'] }}" alt="Foto del vehículo" width="300">
             <p>{{ $vehiculo['descripcion'] }}</p>
             <a href="{{ route('vehiculo.show', ['vehiculo' => $vehiculo['id']]) }}" class="comprar-btn">Ver Detalles y Comprar</a>
         </div>

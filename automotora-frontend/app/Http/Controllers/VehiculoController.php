@@ -41,23 +41,23 @@ class VehiculoController extends Controller
      */
     public function show($id): View
     {
-        // Usamos el alias de configuración de detalle y le añadimos el ID.
-        $apiUrl = config('ords.vehiculo_detail_endpoint') . $id;
+        Log::info('[CONTROLADOR - PASO 1]: Entrando al método show() con ID: ' . $id);
 
-        Log::info('Llamando a la API de detalle de vehículo: ' . $apiUrl);
+        $apiUrl = config('ords.vehiculo_detail_endpoint') . $id;
+        Log::info('[CONTROLADOR - PASO 2]: Construida URL de API: ' . $apiUrl);
 
         $response = Http::get($apiUrl);
+        Log::info('[CONTROLADOR - PASO 3]: Respuesta recibida de la API. Código de estado: ' . $response->status());
 
         if (!$response->successful() || empty($response->json())) {
-            Log::error('Fallo al obtener el detalle del vehículo con ID: ' . $id, [
-                'status' => $response->status(),
-                'response' => $response->body()
-            ]);
+            Log::error('Fallo al obtener el detalle del vehículo. Abortando.');
             abort(404, 'Vehículo no encontrado');
         }
 
         $vehiculo = $response->json();
-
+        Log::info('[CONTROLADOR - PASO 4]: JSON decodificado exitosamente. Intentando renderizar la vista...');
+    
+    // La línea siguiente es donde podría estar el último fallo
         return view('vehiculo.show', ['vehiculo' => $vehiculo]);
     }
 }
