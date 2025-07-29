@@ -1,7 +1,10 @@
 {
-    "name": "Laravel PHP 8.2",
+    "name": "Laravel PHP 8.2 + Node.js",
     "image": "mcr.microsoft.com/devcontainers/php:8.2",
-    "postCreateCommand": "composer install && npm install && php artisan key:generate --force",
+    "features": {
+        "ghcr.io/devcontainers/features/node:1": {}
+    },
+    "postCreateCommand": "composer install",
     "customizations": {
         "vscode": {
             "extensions": [
