@@ -1,0 +1,19 @@
+{
+    "name": "Laravel PHP 8.2",
+    "image": "mcr.microsoft.com/devcontainers/php:8.2",
+    "postCreateCommand": "composer install && npm install && php artisan key:generate --force",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "bmewburn.vscode-intelephense-client",
+                "esbenp.prettier-vscode",
+                "bradlc.vscode-tailwindcss",
+                "onecentlin.laravel-blade"
+            ]
+        }
+    },
+    "forwardPorts": [
+        8000,
+        5173
+    ]
+}
